@@ -8,6 +8,13 @@ export default createStore({
     memos: []
   },
   getters: {
+    //  HomeView.vueで使うメソッドを追加
+    getCount: (state) => {
+      return state.memos.length
+    },
+    getAll: (state) => {
+      return state.memos
+    }
   },
   mutations: {
     // メモを保存する
