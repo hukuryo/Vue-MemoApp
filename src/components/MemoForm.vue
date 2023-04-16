@@ -1,6 +1,7 @@
 <template>
-    <div><input type="text"></div>
-    <div><textarea></textarea></div>
+    <!-- フォームの内容を、v-modelでJavaScriptと結びつける -->
+    <div><input type="text" v-model="title"></div>
+    <div><textarea v-model="content"></textarea></div>
     <div class="center">
         <button @click="save">保存</button>
     </div>
@@ -8,16 +9,27 @@
 
 <script>
 export default {
+    // この名前に意味はないが、基本的にはファイル名にする
     name: 'MemoForm',
+    data() {
+        return {
+            // フォーム要素の初期値を決める処理
+            title: '',
+            content: ''
+        }
+    },
     methods: {
         save() {
+            // フォームから送られてきた内容を保存する変数
             let memo = {
-                title: 'メモのタイトルです',
-                content: 'メモの内容です'
+                title: this.title,
+                content: this.content
             }
             // store/indexファイルのmutationsの中のsaveを呼び出す
             // そして、データをstate内のmemo配列に渡す
             this.$store.commit('save', memo)
+            // メモを保存後にHomeページに飛ばす処理
+            this.$router.push('/')
         }
     }
 }

@@ -1,5 +1,6 @@
 <template>
   <nav>
+    <!-- Vue.jsでは、リンクはaタグでは作らず、以下のように書く -->
     <router-link to="/">Home</router-link> |
     <router-link to="/new">New</router-link> |
     <router-link to="/about">About</router-link>
