@@ -4,6 +4,7 @@
     <div><textarea v-model="content"></textarea></div>
     <div class="center">
         <button @click="save">保存</button>
+        <button @click="remove" v-if="memo.id">削除</button>
     </div>
 </template>
 
@@ -32,10 +33,14 @@ export default {
             if(this.memo.id){
                 memo.id = this.memo.id
             }
-            // store/indexファイルのmutationsの中のsaveを呼び出す
+            // 'save'は、store/indexファイルのmutationsの中のsaveを呼び出す
             // そして、データをstate内のmemo配列に渡す
             this.$store.commit('save', memo)
             // メモを保存後にHomeページに飛ばす処理
+            this.$router.push('/')
+        },
+        remove() {
+            this.$store.commit('delete', this.memo.id)
             this.$router.push('/')
         }
     }
