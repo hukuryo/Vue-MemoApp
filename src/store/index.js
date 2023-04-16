@@ -14,14 +14,24 @@ export default createStore({
     },
     getAll: (state) => {
       return state.memos
+    },
+    getMemoById: (state) => (id) => {
+      // IDと一致したメモを取り出す処理
+      return state.memos.find(memo => memo.id === id)
     }
   },
   mutations: {
     // メモを保存する
     save (state, newMemo){
-      // メモの内容が保存された後に、それぞれの要素にIDを付与する処理
-      newMemo.id = ++state.count
-      state.memos.unshift(newMemo)
+      if(newMemo.id){
+        let x = state.memos.find(memo => memo.id === newMemo.id)
+        x.title = newMemo.title
+        x.content = newMemo.content
+      } else {
+        // メモの内容が保存された後に、それぞれの要素にIDを付与する処理
+        newMemo.id = ++state.count
+        state.memos.unshift(newMemo)
+      }
     }
   },
   actions: {

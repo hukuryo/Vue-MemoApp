@@ -11,11 +11,14 @@
 export default {
     // この名前に意味はないが、基本的にはファイル名にする
     name: 'MemoForm',
+    props: [
+        'memo'
+    ],
     data() {
         return {
             // フォーム要素の初期値を決める処理
-            title: '',
-            content: ''
+            title: this.memo.title,
+            content: this.memo.content
         }
     },
     methods: {
@@ -24,6 +27,10 @@ export default {
             let memo = {
                 title: this.title,
                 content: this.content
+            }
+
+            if(this.memo.id){
+                memo.id = this.memo.id
             }
             // store/indexファイルのmutationsの中のsaveを呼び出す
             // そして、データをstate内のmemo配列に渡す

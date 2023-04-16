@@ -3,7 +3,9 @@
     <!-- v-ifでcomputed内のメソッドを実行する -->
     <ul v-if="HasMemos">
       <li v-for="memo in memos" :key="memo.id">
-        {{ memo.title }}
+        <router-link :to="{ name: 'edit', params: { id: memo.id } }">
+          {{ memo.title }}  
+        </router-link>
       </li>
     </ul>
     <p v-else>メモはありません</p>
